@@ -130,6 +130,16 @@ namespace NFugue.Playing
             {
                 foreach (var note in e.Chord.GetNotes())
                 {
+                    if (note.GetPattern().ToString().StartsWith(e.Chord.Root.OriginalString))
+                    {
+                        note.IsFirstNote = true;
+                        note.IsHarmonicNote = false;
+                    } else
+                    {
+                        note.IsFirstNote = false;
+                        note.IsHarmonicNote = true;
+                    }
+
                     eventManager.AddNote(note);
                 }
             };
